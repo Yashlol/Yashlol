@@ -5,5 +5,3 @@ admin.site.register(Product)
 admin.site.register(Tag)
 
 
-#ertygh
-#tyty5ie4cd59i6t
