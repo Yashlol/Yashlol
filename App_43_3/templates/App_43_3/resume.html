@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }}'s Resume</title>
+    <link rel="stylesheet" href="{% static 'App_43_3/styles.css' %}">
+</head>
+<body>
+    <div class="resume-container">
+        <header>
+            <h1>{{ name }}</h1>
+            <p class="title">{{ title }}</p>
+            <p class="about">{{ about }}</p>
+            <div class="contact-info">
+                <p>Email: {{ email }} | Phone: {{ phone }}</p>
+            </div>
+        </header>
+        
+        <!-- Experience Section -->
+        <section>
+            <h2>Experience</h2>
+            {% for job in experience %}
+                <div class="experience-item">
+                    <h3>{{ job.position }} at {{ job.company }}</h3>
+                    <p class="date">{{ job.years }}</p>
+                </div>
+            {% endfor %}
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                {% for skill in skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2>Projects</h2>
+            {% for project in projects %}
+                <div class="project-item">
+                    <h3>{{ project.name }}</h3>
+                    <p>{{ project.description }}</p>
+                </div>
+            {% endfor %}
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2>Education</h2>
+            {% for edu in education %}
+                <div class="education-item">
+                    <h3>{{ edu.degree }} - {{ edu.institution }}</h3>
+                    <p class="date">{{ edu.year }}</p>
+                </div>
+            {% endfor %}
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Links Section -->
+        <section id="links">
+            <h2>Links</h2>
+            <p>
+                <a href="{{ linkedin }}" target="_blank">LinkedIn</a> | 
+                <a href="{{ github }}" target="_blank">GitHub</a>
+            </p>
+        </section>
+    </div>
+</body>
+</html>
